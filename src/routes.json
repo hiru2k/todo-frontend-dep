@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "common": "auth",
+    "login": "auth/login"
+  },
+  "users": {
+    "common": "users",
+    "unique": "users/unique"
+  }
+}
