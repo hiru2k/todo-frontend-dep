@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import usersHelper from "../../helpers/users.helper";
+import toastsHelper from "../../helpers/toasts.helper";
 
 const initialValues = {
   name: "",
@@ -43,6 +44,9 @@ const useRegisterPageUtils = () => {
       const user = await usersHelper.createUser(userProps);
       console.log(user);
       setLoading(false);
+
+      toastsHelper.showInfo("Your account has been created successfully");
+      navigate("/signin");
     },
   });
 
