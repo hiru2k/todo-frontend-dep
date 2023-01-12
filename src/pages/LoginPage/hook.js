@@ -1,7 +1,9 @@
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 import authHelper from "../../helpers/auth.helper";
+import toastsHelper from "../../helpers/toasts.helper";
 
 const initialValues = {
   email: "",
@@ -28,7 +30,7 @@ const useLoginPageUtils = () => {
         console.log(data);
       } catch (error) {
         if (error.response.status === 401) {
-          alert("Invalid email or password");
+          toastsHelper.showError("Invalid email or password");
         }
       }
     },
