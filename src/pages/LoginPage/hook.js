@@ -29,6 +29,7 @@ const useLoginPageUtils = () => {
 				const { email, password } = values;
 				const data = await authHelper.login(email, password);
 				tokenHelper.addToken(data);
+				navigate("/");
 			} catch (error) {
 				if (error.response.status === 401) {
 					toastsHelper.showError("Invalid email or password");
