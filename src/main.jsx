@@ -8,6 +8,7 @@ import "./index.css";
 import router from "./router";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import Loader from "./components/Loader/Loader";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
@@ -15,6 +16,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 			<RouterProvider router={router} />
 
 			<ToastContainer />
+
+			<Loader />
 		</Provider>
 	</React.StrictMode>
 );

@@ -5,6 +5,8 @@ import authHelper from "../../helpers/auth.helper";
 import toastsHelper from "../../helpers/toasts.helper";
 import tokenHelper from "../../helpers/token.helper";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { loaderActions } from "../../redux/slices/loader.slice";
 
 const initialValues = {
 	email: "",
@@ -20,14 +22,14 @@ const validationSchema = Yup.object({
 
 const useLoginPageUtils = () => {
 	const navigate = useNavigate();
-	const [loading, setLoading] = useState(false);
+	const dispatch = useDispatch();
 
 	const form = useFormik({
 		initialValues,
 		validationSchema,
 		onSubmit: async (values) => {
 			try {
-				setLoading(true);
+				dispatch(loaderActions.setLoading(true));
 				const { email, password } = values;
 				const data = await authHelper.login(email, password);
 				tokenHelper.addToken(data);
@@ -37,7 +39,7 @@ const useLoginPageUtils = () => {
 					toastsHelper.showError("Invalid email or password");
 				}
 			} finally {
-				setLoading(false);
+				dispatch(loaderActions.setLoading(false));
 			}
 		},
 	});
@@ -45,7 +47,6 @@ const useLoginPageUtils = () => {
 	return {
 		form,
 		onRegisterButtonClick: () => navigate("/signup"),
-		loading,
 	};
 };
 
