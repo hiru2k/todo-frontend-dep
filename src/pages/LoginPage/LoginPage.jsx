@@ -1,8 +1,6 @@
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import ModernTextField from "../../components/ModernTextField/ModernTextField";
 import useLoginPageUtils from "./hook";
-import Loader from "../../components/Loader/Loader";
 
 const LoginPage = () => {
 	const { form, onRegisterButtonClick } = useLoginPageUtils();
