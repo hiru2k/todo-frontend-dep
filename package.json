@@ -13,10 +13,12 @@
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.0",
+    "@reduxjs/toolkit": "^1.9.1",
     "axios": "^1.2.2",
     "formik": "^2.2.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.5.0",
     "react-toastify": "^9.1.1",
     "yup": "^0.32.11"
