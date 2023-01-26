@@ -5,7 +5,7 @@ import {
 	Delete as DeleteIcon,
 } from "@mui/icons-material";
 
-const ToDo = ({ todo, onDelete }) => {
+const ToDo = ({ todo, onDelete, onCheck }) => {
 	return (
 		<Box
 			sx={{
@@ -20,7 +20,7 @@ const ToDo = ({ todo, onDelete }) => {
 			}}
 		>
 			<Box display="flex" alignItems="center" columnGap={2}>
-				<IconButton>
+				<IconButton onClick={() => onCheck(todo.id)}>
 					{todo.completed ? (
 						<CheckBoxIcon
 							sx={{

@@ -48,11 +48,27 @@ const useTodoPageUtils = () => {
 		}
 	};
 
+	const onCheck = async (id) => {
+		try {
+			dispatch(loaderActions.setLoading(true));
+
+			await todosHelper.toggleTodo(id);
+
+			await loadTodos();
+		} catch (error) {
+			console.error(error);
+			toastsHelper.showError("Toggling todo failed");
+		} finally {
+			dispatch(loaderActions.setLoading(false));
+		}
+	};
+
 	return {
 		userName,
 		openDialog: () => dispatch(addEditDialogActions.openDialog()),
 		todos,
 		onDelete,
+		onCheck,
 	};
 };
 
