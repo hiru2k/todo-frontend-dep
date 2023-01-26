@@ -10,10 +10,8 @@ import {
 } from "@mui/material";
 import useAddEditDialogUtils from "./hook";
 
-const AddEditDialog = ({ open, onClose }) => {
-	const { form } = useAddEditDialogUtils({ onClose });
-
-	const hasError = form.touched.text && Boolean(form.errors.text);
+const AddEditDialog = () => {
+	const { form, open, onClose, hasError } = useAddEditDialogUtils();
 
 	return (
 		<Dialog open={open} onClose={onClose}>
@@ -23,9 +21,8 @@ const AddEditDialog = ({ open, onClose }) => {
 					<DialogContentText>Enter ToDo text</DialogContentText>
 
 					<TextField
-						autoFocus
 						margin="dense"
-						id="text"
+						name="text"
 						fullWidth
 						variant="standard"
 						value={form.values.text}

@@ -1,9 +1,10 @@
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { loaderActions } from "../../../../redux/slices/loader.slice";
 import todosHelper from "../../../../helpers/todos.helper";
 import toastsHelper from "../../../../helpers/toasts.helper";
+import { addEditDialogActions } from "../../../../redux/slices/add-edit-dialog.slice";
 
 const initialValues = {
 	text: "",
@@ -13,7 +14,8 @@ const validationSchema = Yup.object().shape({
 	text: Yup.string().required("Text is required"),
 });
 
-const useAddEditDialogUtils = ({ onClose }) => {
+const useAddEditDialogUtils = () => {
+	const isDialogOpen = useSelector((s) => s.addEditDialog.open);
 	const dispatch = useDispatch();
 
 	const form = useFormik({
@@ -24,7 +26,7 @@ const useAddEditDialogUtils = ({ onClose }) => {
 			try {
 				await todosHelper.createTodo(values);
 				toastsHelper.showInfo("ToDo created");
-				onClose();
+				closeDialog();
 			} catch (error) {
 				console.log(error);
 				toastsHelper.showError("Creating ToDo failed");
@@ -34,7 +36,17 @@ const useAddEditDialogUtils = ({ onClose }) => {
 		},
 	});
 
-	return { form };
+	const closeDialog = () => {
+		dispatch(addEditDialogActions.closeDialog());
+		form.resetForm();
+	};
+
+	return {
+		form,
+		open: isDialogOpen,
+		onClose: closeDialog,
+		hasError: form.touched.text && Boolean(form.errors.text),
+	};
 };
 
 export default useAddEditDialogUtils;

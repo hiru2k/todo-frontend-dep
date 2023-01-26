@@ -9,10 +9,10 @@ const addEditDialogSlice = createSlice({
 	name: "addEditDialog",
 	initialState,
 	reducers: {
-		openAddEditDialog: (state) => {
+		openDialog: (state) => {
 			state.open = true;
 		},
-		closeAddEditDialog: (state) => {
+		closeDialog: (state) => {
 			state.open = false;
 		},
 	},
