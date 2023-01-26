@@ -12,14 +12,18 @@ const getTodos = async () => {
 };
 
 const toggleTodo = async (id) => {
-	const response = await axiosApp.put(`${routes.todos.common}/${id}`);
-	return response.data;
+	await axiosApp.put(`${routes.todos.common}/${id}`);
+};
+
+const deleteTodo = async (id) => {
+	await axiosApp.delete(`${routes.todos.common}/${id}`);
 };
 
 const todosHelper = {
 	createTodo,
 	getTodos,
 	toggleTodo,
+	deleteTodo,
 };
 
 export default todosHelper;

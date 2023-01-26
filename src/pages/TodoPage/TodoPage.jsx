@@ -7,7 +7,7 @@ import ToDo from "./components/ToDo/ToDo";
 const BTN_SIDE = 70;
 
 const TodoPage = () => {
-	const { userName, openDialog, todos } = useTodoPageUtils();
+	const { userName, openDialog, todos, onDelete } = useTodoPageUtils();
 
 	return (
 		<>
@@ -28,7 +28,7 @@ const TodoPage = () => {
 					}}
 				>
 					{todos.map((t) => (
-						<ToDo key={t.id} todo={t} />
+						<ToDo key={t.id} todo={t} onDelete={onDelete} />
 					))}
 				</Box>
 

@@ -1,7 +1,7 @@
 import { Box, IconButton, Typography } from "@mui/material";
-import { Edit as EditIcon } from "@mui/icons-material";
+import { Delete as DeleteIcon } from "@mui/icons-material";
 
-const ToDo = ({ todo }) => {
+const ToDo = ({ todo, onDelete }) => {
 	return (
 		<Box
 			sx={{
@@ -19,10 +19,10 @@ const ToDo = ({ todo }) => {
 				{todo.text}
 			</Typography>
 
-			<IconButton>
-				<EditIcon
+			<IconButton onClick={() => onDelete(todo.id)}>
+				<DeleteIcon
 					sx={{
-						color: "white",
+						color: "#ff4444",
 					}}
 				/>
 			</IconButton>

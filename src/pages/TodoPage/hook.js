@@ -5,6 +5,7 @@ import { addEditDialogActions } from "../../redux/slices/add-edit-dialog.slice";
 import todosHelper from "../../helpers/todos.helper";
 import { todosActions } from "../../redux/slices/todos.slice";
 import toastsHelper from "../../helpers/toasts.helper";
+import { loaderActions } from "../../redux/slices/loader.slice";
 
 const useTodoPageUtils = () => {
 	const [userName, setUserName] = useState("");
@@ -12,24 +13,46 @@ const useTodoPageUtils = () => {
 	const todos = useSelector((s) => s.todos.todos);
 
 	useEffect(() => {
-		loadData().catch((error) => {
+		loadInitData().catch((error) => {
 			console.error(error);
 			toastsHelper.showError("Loading data failed");
 		});
 	}, []);
 
-	const loadData = async () => {
+	const loadInitData = async () => {
 		const user = await authHelper.getLoggedUser();
 		setUserName(user.name);
 
+		await loadTodos();
+	};
+
+	const loadTodos = async () => {
 		const todos = await todosHelper.getTodos();
 		dispatch(todosActions.setTodosList(todos));
+	};
+
+	const onDelete = async (id) => {
+		try {
+			dispatch(loaderActions.setLoading(true));
+
+			await todosHelper.deleteTodo(id);
+
+			await loadTodos();
+
+			toastsHelper.showInfo("Todo deleted");
+		} catch (error) {
+			console.error(error);
+			toastsHelper.showError("Deleting todo failed");
+		} finally {
+			dispatch(loaderActions.setLoading(false));
+		}
 	};
 
 	return {
 		userName,
 		openDialog: () => dispatch(addEditDialogActions.openDialog()),
 		todos,
+		onDelete,
 	};
 };
 
