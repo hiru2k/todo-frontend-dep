@@ -1,15 +1,12 @@
 import { Box, Button, Container, IconButton, Typography } from "@mui/material";
 import { Edit as EditIcon } from "@mui/icons-material";
 import AddEditDialog from "./components/AddEditDialog/AddEditDialog";
-import { useDispatch } from "react-redux";
-import { addEditDialogActions } from "../../redux/slices/add-edit-dialog.slice";
 import useTodoPageUtils from "./hook";
 
 const BTN_SIDE = 70;
 
 const TodoPage = () => {
-	const dispatch = useDispatch();
-	const { userName } = useTodoPageUtils();
+	const { userName, openDialog } = useTodoPageUtils();
 
 	return (
 		<>
@@ -56,7 +53,7 @@ const TodoPage = () => {
 				</Box>
 
 				<Button
-					onClick={() => dispatch(addEditDialogActions.openDialog())}
+					onClick={openDialog}
 					sx={{
 						backgroundColor: "#1B21AB",
 						color: "white",
