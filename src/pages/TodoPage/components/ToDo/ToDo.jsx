@@ -1,5 +1,8 @@
 import { Box, IconButton, Typography } from "@mui/material";
-import { Delete as DeleteIcon } from "@mui/icons-material";
+import {
+	CheckBoxOutlineBlank,
+	Delete as DeleteIcon,
+} from "@mui/icons-material";
 
 const ToDo = ({ todo, onDelete }) => {
 	return (
@@ -15,9 +18,18 @@ const ToDo = ({ todo, onDelete }) => {
 				borderRadius: 5,
 			}}
 		>
-			<Typography variant="h5" color="white">
-				{todo.text}
-			</Typography>
+			<Box display="flex" alignItems="center" columnGap={2}>
+				<IconButton>
+					<CheckBoxOutlineBlank
+						sx={{
+							color: "white",
+						}}
+					/>
+				</IconButton>
+				<Typography variant="h5" color="white">
+					{todo.text}
+				</Typography>
+			</Box>
 
 			<IconButton onClick={() => onDelete(todo.id)}>
 				<DeleteIcon
