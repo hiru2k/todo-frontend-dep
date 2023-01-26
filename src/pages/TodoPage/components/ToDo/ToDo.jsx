@@ -6,7 +6,7 @@ const ToDo = ({ todo }) => {
 		<Box
 			sx={{
 				backgroundColor: "#1C5EC1",
-				my: 5,
+				my: 2.5,
 				width: 500,
 				display: "flex",
 				justifyContent: "space-between",
