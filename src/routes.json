@@ -1,10 +1,13 @@
 {
-  "auth": {
-    "common": "auth",
-    "login": "auth/login"
-  },
-  "users": {
-    "common": "users",
-    "unique": "users/unique"
-  }
+	"auth": {
+		"common": "auth",
+		"login": "auth/login"
+	},
+	"users": {
+		"common": "users",
+		"unique": "users/unique"
+	},
+	"todos": {
+		"common": "todos"
+	}
 }
