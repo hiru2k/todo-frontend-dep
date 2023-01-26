@@ -1,10 +1,13 @@
 import { Box, Button, Container, IconButton, Typography } from "@mui/material";
 import { Edit as EditIcon } from "@mui/icons-material";
 import AddEditDialog from "./components/AddEditDialog/AddEditDialog";
+import { useState } from "react";
 
 const BTN_SIDE = 70;
 
 const TodoPage = () => {
+	const [openDialog, setOpenDialog] = useState(false);
+
 	return (
 		<>
 			<Container>
@@ -50,6 +53,7 @@ const TodoPage = () => {
 				</Box>
 
 				<Button
+					onClick={() => setOpenDialog(true)}
 					sx={{
 						backgroundColor: "#1B21AB",
 						color: "white",
@@ -72,7 +76,10 @@ const TodoPage = () => {
 				</Button>
 			</Container>
 
-			<AddEditDialog />
+			<AddEditDialog
+				open={openDialog}
+				onClose={() => setOpenDialog(false)}
+			/>
 		</>
 	);
 };

@@ -8,9 +8,9 @@ import {
 	TextField,
 } from "@mui/material";
 
-const AddEditDialog = () => {
+const AddEditDialog = ({ open, onClose }) => {
 	return (
-		<Dialog open={true}>
+		<Dialog open={open} onClose={onClose}>
 			<DialogTitle>Add ToDo</DialogTitle>
 			<DialogContent>
 				<DialogContentText>Enter ToDo text</DialogContentText>
@@ -26,7 +26,7 @@ const AddEditDialog = () => {
 				/>
 			</DialogContent>
 			<DialogActions>
-				<Button>Cancel</Button>
+				<Button onClick={onClose}>Cancel</Button>
 				<Button>Create</Button>
 			</DialogActions>
 		</Dialog>
