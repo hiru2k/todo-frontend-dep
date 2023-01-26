@@ -5,7 +5,7 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./index.css";
-import router from "./router";
+import Router from "./router";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import Loader from "./components/Loader/Loader";
@@ -13,7 +13,7 @@ import Loader from "./components/Loader/Loader";
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<RouterProvider router={router} />
+			<Router />
 
 			<ToastContainer />
 

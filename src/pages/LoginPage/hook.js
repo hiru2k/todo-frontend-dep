@@ -32,10 +32,7 @@ const useLoginPageUtils = () => {
 				// display loading screen
 				dispatch(loaderActions.setLoading(true));
 
-				const { email, password } = values;
-				const data = await authHelper.login(email, password);
-				tokenHelper.addToken(data);
-
+				await login();
 				await setLoggedUser();
 
 				navigate("/");
@@ -49,6 +46,14 @@ const useLoginPageUtils = () => {
 		},
 	});
 
+	// login user and save token in local storage
+	const login = async () => {
+		const { email, password } = form.values;
+		const data = await authHelper.login(email, password);
+		tokenHelper.addToken(data);
+	};
+
+	// get logged user id and set it in redux store (global state)
 	const setLoggedUser = async () => {
 		const data = await authHelper.getLoggedUser();
 		dispatch(authActions.setUserId(data.id));
