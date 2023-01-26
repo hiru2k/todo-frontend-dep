@@ -11,7 +11,7 @@ import {
 import useAddEditDialogUtils from "./hook";
 
 const AddEditDialog = ({ open, onClose }) => {
-	const { form } = useAddEditDialogUtils();
+	const { form } = useAddEditDialogUtils({ onClose });
 
 	const hasError = form.touched.text && Boolean(form.errors.text);
 
