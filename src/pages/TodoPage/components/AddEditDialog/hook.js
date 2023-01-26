@@ -5,6 +5,7 @@ import { loaderActions } from "../../../../redux/slices/loader.slice";
 import todosHelper from "../../../../helpers/todos.helper";
 import toastsHelper from "../../../../helpers/toasts.helper";
 import { addEditDialogActions } from "../../../../redux/slices/add-edit-dialog.slice";
+import { todosActions } from "../../../../redux/slices/todos.slice";
 
 const initialValues = {
 	text: "",
@@ -25,6 +26,8 @@ const useAddEditDialogUtils = () => {
 			dispatch(loaderActions.setLoading(true));
 			try {
 				await todosHelper.createTodo(values);
+				await refreshTodosList();
+
 				toastsHelper.showInfo("ToDo created");
 				closeDialog();
 			} catch (error) {
@@ -39,6 +42,11 @@ const useAddEditDialogUtils = () => {
 	const closeDialog = () => {
 		dispatch(addEditDialogActions.closeDialog());
 		form.resetForm();
+	};
+
+	const refreshTodosList = async () => {
+		const todos = await todosHelper.getTodos();
+		dispatch(todosActions.setTodosList(todos));
 	};
 
 	return {
