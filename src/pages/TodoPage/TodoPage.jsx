@@ -2,11 +2,12 @@ import { Box, Button, Container, IconButton, Typography } from "@mui/material";
 import { Edit as EditIcon } from "@mui/icons-material";
 import AddEditDialog from "./components/AddEditDialog/AddEditDialog";
 import useTodoPageUtils from "./hook";
+import ToDo from "./components/ToDo/ToDo";
 
 const BTN_SIDE = 70;
 
 const TodoPage = () => {
-	const { userName, openDialog } = useTodoPageUtils();
+	const { userName, openDialog, todos } = useTodoPageUtils();
 
 	return (
 		<>
@@ -26,30 +27,9 @@ const TodoPage = () => {
 						alignItems: "center",
 					}}
 				>
-					<Box
-						sx={{
-							backgroundColor: "#1C5EC1",
-							my: 5,
-							width: 500,
-							display: "flex",
-							justifyContent: "space-between",
-							alignItems: "center",
-							p: 2,
-							borderRadius: 5,
-						}}
-					>
-						<Typography variant="h5" color="white">
-							Todo 1
-						</Typography>
-
-						<IconButton>
-							<EditIcon
-								sx={{
-									color: "white",
-								}}
-							/>
-						</IconButton>
-					</Box>
+					{todos.map((t) => (
+						<ToDo key={t.id} todo={t} />
+					))}
 				</Box>
 
 				<Button
