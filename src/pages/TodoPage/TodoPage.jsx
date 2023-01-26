@@ -3,17 +3,19 @@ import { Edit as EditIcon } from "@mui/icons-material";
 import AddEditDialog from "./components/AddEditDialog/AddEditDialog";
 import { useDispatch } from "react-redux";
 import { addEditDialogActions } from "../../redux/slices/add-edit-dialog.slice";
+import useTodoPageUtils from "./hook";
 
 const BTN_SIDE = 70;
 
 const TodoPage = () => {
 	const dispatch = useDispatch();
+	const { userName } = useTodoPageUtils();
 
 	return (
 		<>
 			<Container>
 				<Typography variant="h2" textAlign="center" mt={5}>
-					Hi Hiru
+					Hi {userName}
 				</Typography>
 				<Typography variant="h4" textAlign="center" mt={3}>
 					Check your ToDos List
