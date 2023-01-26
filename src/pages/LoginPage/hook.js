@@ -6,6 +6,7 @@ import toastsHelper from "../../helpers/toasts.helper";
 import tokenHelper from "../../helpers/token.helper";
 import { useDispatch } from "react-redux";
 import { loaderActions } from "../../redux/slices/loader.slice";
+import { authActions } from "../../redux/slices/auth.slice";
 
 const initialValues = {
 	email: "",
@@ -28,10 +29,15 @@ const useLoginPageUtils = () => {
 		validationSchema,
 		onSubmit: async (values) => {
 			try {
+				// display loading screen
 				dispatch(loaderActions.setLoading(true));
+
 				const { email, password } = values;
 				const data = await authHelper.login(email, password);
 				tokenHelper.addToken(data);
+
+				await setLoggedUser();
+
 				navigate("/");
 			} catch (error) {
 				if (error.response.status === 401) {
@@ -42,6 +48,11 @@ const useLoginPageUtils = () => {
 			}
 		},
 	});
+
+	const setLoggedUser = async () => {
+		const data = await authHelper.getLoggedUser();
+		dispatch(authActions.setUserId(data.id));
+	};
 
 	return {
 		form,
