@@ -6,8 +6,12 @@ import {
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import TodoPage from "./pages/TodoPage/TodoPage";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useMemo } from "react";
+import { useEffect } from "react";
+import tokenHelper from "./helpers/token.helper";
+import { authActions } from "./redux/slices/auth.slice";
+import authHelper from "./helpers/auth.helper";
 
 // authenticated routes
 const authenticatedRoutes = [
@@ -39,6 +43,16 @@ const unauthenticatedRoutes = [
 
 const Router = () => {
 	const userId = useSelector((s) => s.auth.userId);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		const token = tokenHelper.getToken();
+		if (token) {
+			authHelper.getLoggedUser().then((user) => {
+				dispatch(authActions.setUserId(user.id));
+			});
+		}
+	}, []);
 
 	const router = useMemo(
 		() =>
